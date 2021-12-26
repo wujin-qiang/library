@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.dao.LendDao">
+
+    <update id="returnBookOne">
+        update lend_list set back_date = sysdate() where book_id = #{book_id}
+        and reader_id = #{reader_id} and back_date is null
+    </update>
+    <update id="returnBookTwo" parameterType="long">
+        update book_info set number = number + 1 where book_id = #{book_id}
+    </update>
+    <insert id="lendBookOne">
+        insert into lend_list values
+        (null , #{book_id} , #{reader_id} , sysdate() , null)
+    </insert>
+    <update id="lendBookTwo" parameterType="long">
+        update book_info set number = number - 1 where book_id = #{book_id}
+    </update>
+    <select id="lendList" resultType="com.library.bean.Lend">
+        select * from lend_list
+    </select>
+    <select id="myLendList" resultType="com.library.bean.Lend" parameterType="long">
+        select * from lend_list where reader_id = #{reader_id} order by back_date asc;
+    </select>
+    <delete id="deleteLend" parameterType="long">
+        delete from lend_list where ser_num = #{ser_num}
+    </delete>
+    <select id="lendBookList" resultType="int" parameterType="long">
+        select count(*) from lend_list where book_id = #{book_id} and back_date is null
+    </select>
+    <select id="readerIdList" resultType="int" parameterType="long">
+        select count(*) from lend_list where reader_id = #{reader_id} and back_date is null
+    </select>
+    <select id="lendBookDateList" resultType="int" parameterType="long">
+        select count(*) from lend_list where book_id = #{book_id} and now()> date_add(lend_date,interval 3 day) and back_date is null
+    </select>
+
+</mapper>
