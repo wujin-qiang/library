@@ -5,7 +5,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -14,6 +17,15 @@ public class AdminDao {
     private final static String NAMESPACE = "com.library.dao.AdminDao.";
     @Resource
     private SqlSessionTemplate sqlSessionTemplate;
+    
+    public int deleteAdminInfo(final long admin_id) {
+        return sqlSessionTemplate.delete(NAMESPACE + "deleteAdminInfo", admin_id);
+    }
+    
+    public ArrayList<Admin> getAllAdminInfo() {
+        List<Admin> result = sqlSessionTemplate.selectList(NAMESPACE + "getAllAdminInfo");
+        return (ArrayList<Admin>) result;
+    }
 
     public int getMatchCount(final String username, final String password) {
         Map<String, Object> paramMap = new HashMap<>();

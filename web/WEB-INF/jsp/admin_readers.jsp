@@ -10,13 +10,9 @@
         $(function () {
             $('#header').load('admin_header.html');
         })
-
-        function deleteFun() {
-            alert("确定删除该读者吗？")
-        }
     </script>
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/6.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header"></div>
@@ -76,11 +72,30 @@ background-attachment: fixed;">
                     <td><c:out value="${reader.address}"></c:out></td>
                     <td><c:out value="${reader.phone}"></c:out></td>
                     <td><a href="reader_edit.html?readerId=<c:out value="${reader.readerId}"></c:out>"><button type="button" class="btn btn-info btn-xs">编辑</button></a></td>
-                    <td><a href="reader_delete.html?readerId=<c:out value="${reader.readerId}"></c:out>"><button type="button" onclick="deleteFun()" class="btn btn-danger btn-xs">删除</button></a></td>
+                    <td><a href="javascript:if(confirm('确实要删除吗?'))
+                    location='reader_delete.html?readerId=<c:out value="${reader.readerId}"></c:out>'">
+                    <button type="button"  class="btn btn-danger btn-xs">删除</button></a></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+        
+        <div class='page all'>
+				<b>共${pageUtil.pageNumber}</b>条,当前第<span>${pageUtil.pageIndex}</span>页
+				<a href="allreaders.html?pageIndex=1" class='first'>首页</a> <a
+					href="allreaders.html?pageIndex=${pageUtil.pageIndex>1?pageUtil.pageIndex-1:1}"
+					class='pre'>上一页</a>
+				<c:forEach begin="1" end="${pageUtil.pageCount}" var="i">
+					<a href="allreaders.html?pageIndex=${i}"
+						style="text-decoration: none;">${i}</a>
+				</c:forEach>
+				<a
+					href="allreaders.html?pageIndex=${pageUtil.pageIndex<pageUtil.pageCount?pageUtil.pageIndex+1:pageUtil.pageCount}"
+					class='next'>下一页</a> <a
+					href="allreaders.html?pageIndex=${pageUtil.pageCount}"
+					class='last'>末页</a>
+			</div>
+			
     </div>
 </div>
 </body>

@@ -24,6 +24,8 @@ public class LendController {
 
     @Autowired
     private BookService bookService;
+    
+    
 
     @RequestMapping("/deletebook.html")
     public String deleteBook(HttpServletRequest request, RedirectAttributes redirectAttributes) {
@@ -96,19 +98,19 @@ public class LendController {
         return "redirect:/lendlist.html";
     }
 
-    @RequestMapping("/lendbook.html")
+    @RequestMapping("/lendbook.html")//借阅图书
     public String bookLend(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         long bookId = Long.parseLong(request.getParameter("bookId"));
         long readerId = ((ReaderCard) request.getSession().getAttribute("readercard")).getReaderId();
-        if(lendService.selectReaderIdForLend(readerId)){
-            redirectAttributes.addFlashAttribute("error", "每个读者最多借阅十本书，本次借阅失败！！");
-        }else{
-            if (lendService.lendBook(bookId, readerId)) {
+        if(lendService.lendBookDateList1(readerId)){
+      	//判断是否有逾期未归还的书籍
+          redirectAttributes.addFlashAttribute("error", "当前有逾期未归还的图书，请归还逾期图书后再借阅！！！");
+       }else 
+        	if (lendService.lendBook(bookId, readerId)) {
                 redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
             } else {
                 redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
             }
-        }
         return "redirect:/reader_books.html";
     }
 

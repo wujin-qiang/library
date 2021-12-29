@@ -10,6 +10,7 @@ public class Lend implements Serializable {
     private long reader_id;
     private Date lend_date;
     private Date back_date;
+    private Date Estimated_back_date;
     private String  name;
     private String ISBN;
 
@@ -50,6 +51,14 @@ public class Lend implements Serializable {
         this.back_date = back_date;
     }
 
+    public Date getEstimated_back_date() {
+        return Estimated_back_date;
+    }
+
+    public void setEstimated_back_date(Date Estimated_back_date) {
+        this.Estimated_back_date = Estimated_back_date;
+    }
+    
     public Date getLendDate() {
         return lend_date;
     }

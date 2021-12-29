@@ -34,5 +34,9 @@
     <select id="lendBookDateList" resultType="int" parameterType="long">
         select count(*) from lend_list where book_id = #{book_id} and now()> date_add(lend_date,interval 3 day) and back_date is null
     </select>
+    
+    <select id="lendBookDateList1" resultType="int" parameterType="long">
+        select count(*) from lend_list where reader_id  = #{reader_id} and now()> date_add(lend_date,interval 3 day) and back_date is null
+    </select>
 
 </mapper>

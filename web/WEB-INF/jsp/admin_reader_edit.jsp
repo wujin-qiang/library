@@ -9,9 +9,10 @@
         $(function () {
             $('#header').load('admin_header.html');
         })
+        
     </script>
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/6.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header" style="padding-bottom: 80px"></div>
@@ -24,13 +25,16 @@ background-attachment: fixed;">
             <form action="reader_edit_do.html?readerId=${readerInfo.readerId}" method="post" id="readeredit" >
 
                 <div class="input-group" style="padding-top: 20px;">
-                    <span>用户名 </span>
-                    <input type="text" name="name" id="name" value="${readerInfo.name}" >
+                   <!--  <span>用户名</span>:${readerInfo.name}-->
+                   <span>用户名 * 不可更改</span>
+                    <input type="text"  name="name" id="name" readonly value="${readerInfo.name}" >
                     <span></span>
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
                     <span >用户性别</span>
-                    <input type="text"  name="sex" id="sex" value="${readerInfo.sex}" >
+                   <!-- <input type="text"  name="sex" id="sex" value="${readerInfo.sex}" >-->
+                    <input type="radio" value="男" name="sex" />男
+        			<input type="radio" value="女"name="sex" checked />女
                     <span></span>
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
@@ -57,7 +61,15 @@ background-attachment: fixed;">
                             alert("请填入完整读者信息！");
                             return false;
                         }
-                    })
+                        if (isNaN($("#phone").val())) {
+							alert("输入的手机号必须是11位数字");
+							return false;
+                    }
+                    	if ($("#phone").val().length!=11){
+            				alert("请输入11位手机号");
+            				return false;
+            		}
+                    }) 
                 </script>
             </form>
         </div>

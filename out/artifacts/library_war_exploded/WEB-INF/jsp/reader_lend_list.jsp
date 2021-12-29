@@ -10,9 +10,16 @@
         $(function () {
             $('#header').load('reader_header.html');
         })
+        function GetDateDiff(startDate,endDate)
+    		{
+    			var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/" ))).getTime();
+   				var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/" ))).getTime();
+    			var dates = Math.abs((startTime - endTime))/(1000*60*60*24);
+    			return  dates;
+    		}
     </script>
 </head>
-<body background="/img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/6.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header"></div>
@@ -63,8 +70,9 @@ background-attachment: fixed;">
                     <td><c:out value="${alog.ISBN}"></c:out></td>
                     <td><c:out value="${alog.lendDateStr}"></c:out></td>
                     <td><c:out value="${alog.backDateStr}"></c:out></td>
-                    <c:if test="${empty alog.backDateStr}">
-                        <td>未还</td>
+                   
+                    <c:if  test="${empty alog.backDateStr}">
+                        	<td>未还</td>
                     </c:if>
                     <c:if test="${!empty alog.backDateStr}">
                         <td>已还</td>

@@ -6,14 +6,12 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js" ></script>
 
-
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/5.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 
 <div id="header"></div>
-
 <div class="col-xs-6 col-md-offset-3" style="padding-top: 50px;position: relative">
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -38,7 +36,8 @@ background-attachment: fixed;">
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
                     <span >性别</span>
-                    <input type="text"  name="sex" id="sex" >
+                    <input type="radio" value="男" name="sex" />男
+        			<input type="radio" value="女" name="sex" checked />女
                     <span></span>
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
@@ -60,7 +59,7 @@ background-attachment: fixed;">
 
                 <div class="input-group" style="padding-top: 20px;">
                     <input style="align-items: center" type="submit" value="注册" class="btn btn-success btn-sm"
-                           class="text-left">
+                           class="text-left"  name="addBtn" id="addBtn"  onclick="aaa()" >
                     <a href="login" style="align-items: center"  class="btn btn-success btn-sm">返回</a>
                 </div>
 
@@ -73,7 +72,19 @@ background-attachment: fixed;">
                             alert("请填入完整读者信息！");
                             return mySubmit(false);
                         }
+                        if (isNaN($("#phone").val())) {
+							alert("输入的手机号必须是11位数字");
+							return mySubmit(false);
+                    	}
+                    	if ($("#phone").val().length!=11){
+            			alert("请输入11位手机号");
+            				return mySubmit(false);
+            			}
                     })
+                    $('#addBtn').click(function () {
+                    	alert('是否确认提交信息？');
+            		})
+                    //}
                 </script>
             </form>
         </div>

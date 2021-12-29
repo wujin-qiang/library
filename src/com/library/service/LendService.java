@@ -46,5 +46,13 @@ public class LendService {
     public boolean lendBookDateList(long bookId) {
         return lendDao.lendBookDateList(bookId) > 0 ;
     }
+    
+    //判断是否有图书逾期未归还
+    public boolean lendBookDateList1(long readerId) {
+        return lendDao.lendBookDateList1(readerId) >= 1;
+    }
+
+	
+    
 
 }

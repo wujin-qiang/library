@@ -11,8 +11,14 @@
             $('#header').load('admin_header.html');
         })
     </script>
+    <style>
+    #images{
+		width: 150px;
+		height: 250px;
+	}
+    </style>
 </head>
-<body background="../../static/img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/2.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header" style="padding-bottom: 80px"></div>
@@ -58,12 +64,20 @@ background-attachment: fixed;">
                     <td>${detail.pubdate}</td>
                 </tr>
                 <tr>
-                    <th>分类号</th>
+                    <th>分类</th>
                     <td>${detail.classId}</td>
                 </tr>
                 <tr>
                     <th>数量</th>
                     <td>${detail.number}</td>
+                </tr>
+                <tr>
+                    <th>封面</th>
+                    <td>
+                <c:if test="${detail.url != null}">
+                    <img alt="" src="/image/${detail.url}" id="images">
+                </c:if>
+            </td>
                 </tr>
                 </tbody>
             </table>

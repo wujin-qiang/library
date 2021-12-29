@@ -5,13 +5,14 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="static/js/register.js"></script>
     <script>
         $(function () {
             $('#header').load('admin_header.html');
         })
     </script>
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/7.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 
@@ -40,7 +41,8 @@ background-attachment: fixed;">
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
                     <span >用户性别</span>
-                    <input type="text"  name="sex" id="sex" >
+                    <input type="radio" value="男" name="sex" />男
+        			<input type="radio" value="女"name="sex" checked />女
                     <span></span>
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
@@ -61,7 +63,7 @@ background-attachment: fixed;">
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
                     <input style="align-items: center" type="submit" value="添加" class="btn btn-success btn-sm"
-                           class="text-left">
+                           class="text-left" name="addBtn" id="addBtn" >
 
                 </div>
 
@@ -73,7 +75,15 @@ background-attachment: fixed;">
                         if($("#password").val()==''||$("#name").val()==''||$("#sex").val()==''||$("#birth").val()==''||$("#address").val()==''||$("#phone").val()==''){
                             alert("请填入完整读者信息！");
                             return mySubmit(false);
-                        }
+                        }else 
+                        if (isNaN($("#phone").val())) {
+							alert("输入的手机号必须是11位数字");
+							return mySubmit(false);
+                    	}
+                    	if ($("#phone").val().length!=11){
+            			alert("请输入11位手机号");
+            				return mySubmit(false);
+            			}
                     })
                 </script>
             </form>

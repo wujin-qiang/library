@@ -11,8 +11,14 @@
             $('#header').load('reader_header.html');
         })
     </script>
+    <style>
+    #images{
+		width: 150px;
+		height: 250px;
+	}
+    </style>
 </head>
-<body background="img/lizhi.jpg" style=" background-repeat:no-repeat ;
+<body background="img/4.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header"></div>
@@ -67,7 +73,14 @@ background-attachment: fixed;">
                     <c:if test="${detail.number==0}">
                         <td>借出</td>
                     </c:if>
-
+                </tr>
+                <tr>
+                    <th>封面</th>
+                    <td>
+                <c:if test="${detail.url != null}">
+                    <img alt="" src="/image/${detail.url}" id="images">
+                </c:if>
+            </td>
                 </tr>
                 </tbody>
             </table>

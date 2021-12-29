@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
 <nav style="position:fixed;z-index: 999;width: 100%;background-color: #25c6fc" class="navbar navbar-default"
      role="navigation">
     <div class="container-fluid">
@@ -43,6 +45,14 @@
                         密码修改
                     </a>
                 </li>
+                <c:if test="${admin.isSup==1}">
+                    <li >
+                        <a href="alladmins.html" style="color: white">
+                            全部管理员显示
+                        </a>
+                    </li>
+                </c:if>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login.html" style="color: white">${admin.username}, 已登录</a>

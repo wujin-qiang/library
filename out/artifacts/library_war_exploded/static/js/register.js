@@ -10,12 +10,12 @@ var backBtn = null;
 
 
 $(function(){
-
 	userName = $("#name");
 	userPassword = $("#password");
 	ruserPassword = $("#ruserPassword");
 	phone = $("#phone");
 	birthday = $("#birth");
+	addBtn = $("#addBtn");
 
 	//初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
 	userName.next().html("*");
@@ -125,7 +125,8 @@ $(function(){
 		}
 	});
 	
-	addBtn.bind("click",function(){
+	
+	addBtn.bind("focus",function(){
 		if(userCode.attr("validateStatus") != "true"){
 			userCode.blur();
 		}else if(userName.attr("validateStatus") != "true"){
@@ -142,10 +143,39 @@ $(function(){
 			userRole.blur();
 		}else{
 			if(confirm("是否确认提交数据")){
-				$("#userForm").submit();
+				$("readeredit").submit();
 			}
 		}
 	});
-
+	
+//	$('#addBtn').click(function () {
+//		 if(userName.attr("validateStatus") != "true"){
+//			userName.blur();
+//			return false;
+//		}else if(userPassword.attr("validateStatus") != "true"){
+//			userPassword.blur();
+//			alert('密码不正确');
+//			return false;
+//		}else if(ruserPassword.attr("validateStatus") != "true"){
+//			ruserPassword.blur();
+//			alert('密码不正确');
+//			return false;
+//		}else if(birthday.attr("validateStatus") != "true"){
+//			birthday.blur();
+//			return false;
+//		}else if(phone.attr("validateStatus") != "true"){
+//			phone.blur();
+//			return false;
+//		}else{
+//			alert('是否确认提交信息？');
+//		}
+//    });
+	
+	
+	
+	
+	
+	
+	
 });
 

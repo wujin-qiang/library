@@ -4,32 +4,58 @@
 <head>
     <title>图书馆首页</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/js.cookie.js"></script>
-    <style>
-        #login{
-           height: 50%;
-            width: 28%;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 5%;
-            display: block;
-            position: center;
-        }
-
-        .form-group {
-            margin-bottom: 0;
-        }
-        * {
-            padding:0;
-            margin:0;
-        }
-    </style>
+<style>
+body{
+	background-image: linear-gradient(332deg, #D9AFD9 0%, #97D9E1 100%);
+}
+#login {
+	height: 50%;
+	width: 28%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	display: block;
+	position: center;
+}
+.welcomeText {
+	font-family: '华文行楷';
+	font-size: 20px;
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	box-shadow: 0px 15px 10px -15px #000;
+	z-index: 100px;
+	background-image: linear-gradient(332deg, #D9AFD9 0%, #97D9E1 100%);
+}
+#container {
+    width:  100%;
+    height: 450px;
+    overflow: hidden;
+}
+#photo {
+    width: 300vw;
+    animation: switch 5s ease-out infinite;
+}
+</style>
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body  style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
+<div class="topNavigation">
+			<div class="welcomeText">欢迎使用闽南师范大学图书综合管理系统！</div>
+<div  id="container">
+        <div id="photo">
+            <img src="img/bg.jpg" />
+            <img src="img/bg2.jpg" />
+            <img src="img/bg3.jpg" />
+            <img src="img/bg4.jpg" />
+        </div>
+</div>
+
 <c:if test="${!empty error}">
     <script>
             alert("${error}");
@@ -37,6 +63,10 @@ background-attachment: fixed;">
 </script>
 </c:if>
 <h2 style="text-align: center; color: white; font-family: '华文行楷'; font-size: 500%">图 书 管 理 系 统</h2>
+
+
+
+
 
 <div class="panel panel-default" id="login">
     <div class="panel-heading" style="background-color: #fff">

@@ -11,7 +11,7 @@
         })
     </script>
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/4.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header" style="padding-bottom: 80px"></div>
@@ -30,11 +30,13 @@ background-attachment: fixed;">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">姓名</span>
-                    <input type="text" class="form-control" name="name" id="name" value="${readerinfo.name}" >
+                    <input type="text" class="form-control" name="name" id="name" value="${readerinfo.name}"  readonly>
                 </div>
                 <div class="input-group">
                     <span  class="input-group-addon">性别</span>
-                    <input type="text" class="form-control" name="sex" id="sex"  value="${readerinfo.sex}" >
+                    <!--  <input type="text" class="form-control" name="sex" id="sex"  value="${readerinfo.sex}" >-->
+                    <input type="radio"  value="男" name="sex" />男
+        			<input type="radio"  value="女"name="sex" checked />女
                 </div>
                 <div class="input-group">
                     <span  class="input-group-addon">出生日期</span>
@@ -57,6 +59,14 @@ background-attachment: fixed;">
                             alert("请填入完整图书信息！");
                             return false;
                         }
+                        if (isNaN($("#phone").val())) {
+							alert("输入的手机号必须是11位数字");
+							return false;
+                    }
+                    	if ($("#phone").val().length!=11){
+            				alert("请输入11位手机号");
+            				return false;
+            		}
                     })
                 </script>
             </form>

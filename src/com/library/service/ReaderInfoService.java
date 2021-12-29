@@ -12,9 +12,13 @@ public class ReaderInfoService {
     @Autowired
     private ReaderInfoDao readerInfoDao;
 
-    public ArrayList<ReaderInfo> readerInfos() {
-        return readerInfoDao.getAllReaderInfo();
+    public ArrayList<ReaderInfo> readerInfos(int index) {
+        return readerInfoDao.getAllReaderInfo(index);
     }
+    
+    public int getTotal() {
+    	return readerInfoDao.getTotal();
+    }  
 
     public boolean deleteReaderInfo(long readerId) {
         return readerInfoDao.deleteReaderInfo(readerId) > 0;

@@ -15,10 +15,14 @@ public class ReaderInfoDao {
     @Resource
     private SqlSessionTemplate sqlSessionTemplate;
 
-    public ArrayList<ReaderInfo> getAllReaderInfo() {
-        List<ReaderInfo> result = sqlSessionTemplate.selectList(NAMESPACE + "getAllReaderInfo");
+    public ArrayList<ReaderInfo> getAllReaderInfo(int index) {
+        List<ReaderInfo> result = sqlSessionTemplate.selectList(NAMESPACE + "getAllReaderInfo",index);
         return (ArrayList<ReaderInfo>) result;
     }
+    
+    public Integer getTotal() {
+		 return sqlSessionTemplate.selectOne(NAMESPACE + "getTotal");
+	 }
 
     public ReaderInfo findReaderInfoByReaderId(final long reader_id) {
         return sqlSessionTemplate.selectOne(NAMESPACE + "findReaderInfoByReaderId", reader_id);

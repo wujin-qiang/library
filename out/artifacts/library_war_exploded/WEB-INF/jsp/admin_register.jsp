@@ -5,10 +5,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js" ></script>
-
-
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/5.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 
@@ -19,7 +17,7 @@ background-attachment: fixed;">
             <h3 class="panel-title">管理员注册</h3>
         </div>
         <div class="panel-body">
-            <form action="admin_add" method="post" id="readeredit" >
+            <form action="admin_add" method="post" id="readeredit" onsubmit="return aaa()">
                 <div class="input-group" style="padding-top: 20px;">
                     <span>用户名 </span>
                     <input type="text" name="name" id="name"  >
@@ -37,7 +35,7 @@ background-attachment: fixed;">
                 </div>
                 <div class="input-group" style="padding-top: 20px;">
                     <input style="align-items: center" type="submit" value="注册" class="btn btn-success btn-sm"
-                           class="text-left">
+                           class="text-left" name="addBtn" id="addBtn"  onclick="aaa()" >
                     <a href="login" style="align-items: center"  class="btn btn-success btn-sm">返回</a>
                 </div>
 
@@ -50,7 +48,11 @@ background-attachment: fixed;">
                             alert("请填入完整信息！");
                             return mySubmit(false);
                         }
+                        
                     })
+                     $('#addBtn').click(function () {
+                    	alert('是否确认提交信息？');
+            		})
                 </script>
             </form>
         </div>

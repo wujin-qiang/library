@@ -10,13 +10,9 @@
         $(function () {
             $('#header').load('admin_header.html');
         })
-
-        function deleteFun() {
-            alert("确定删除该记录吗？")
-        }
     </script>
 </head>
-<body background="img/login_bg.jpeg" style=" background-repeat:no-repeat ;
+<body background="img/8.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 <div id="header"></div>
@@ -68,12 +64,13 @@ background-attachment: fixed;">
                     <td><c:out value="${alog.lendDateStr}"></c:out></td>
                     <td><c:out value="${alog.backDateStr}"></c:out></td>
                     <td>
-                        <a href="deletelend.html?serNum=<c:out value='${alog.ser_num}'></c:out>">
+                        <a href="javascript:if(confirm('确实要删除吗?'))
+                        location='deletelend.html?serNum=<c:out value='${alog.ser_num}'></c:out>'">
                             <c:if test="${!empty alog.backDateStr}">
-                                <button type="button"  onclick="deleteFun()" class="btn btn-danger btn-xs">删除</button>
+                                <button type="button"   class="btn btn-danger btn-xs">删除</button>
                             </c:if>
                             <c:if test="${empty alog.backDateStr}">
-                                <button type="button" class="btn btn-default btn-xs" onclick="deleteFun()" disabled="disabled">删除</button>
+                                <button type="button" class="btn btn-default btn-xs"  disabled="disabled">删除</button>
                             </c:if>
                         </a>
                     </td>
@@ -83,6 +80,5 @@ background-attachment: fixed;">
         </table>
     </div>
 </div>
-
 </body>
 </html>

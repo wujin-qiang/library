@@ -1,10 +1,6 @@
 package com.library.bean;
 
-/**
- * Author: JieYuDa
- * Desc:
- * File created at 2019/11/19
- */
+
 public class LendDate extends Lend {
     private String lendDateStr;
     private String backDateStr;

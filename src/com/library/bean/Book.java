@@ -1,10 +1,11 @@
 package com.library.bean;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
-public class Book implements Serializable {
+
+public class Book  {
 
     private long book_id;
     private String name;
@@ -15,17 +16,27 @@ public class Book implements Serializable {
     private String language;
     private BigDecimal price;
     private String pub_date;
-    private int class_id;
+    private String class_id;
     private int number;
     private String overDate;
+    private String url;//image
+   
+	public String getUrl() {
+		return url;
+	}
 
-    public String getOverDate() {
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getOverDate() {
         return overDate;
     }
 
     public void setOverDate(String overDate) {
         this.overDate = overDate;
     }
+    
     public long getBookId() {
         return book_id;
     }
@@ -98,11 +109,11 @@ public class Book implements Serializable {
         this.pub_date = pub_date;
     }
 
-    public int getClassId() {
+    public String getClassId() {
         return class_id;
     }
 
-    public void setClassId(int class_id) {
+    public void setClassId(String class_id) {
         this.class_id = class_id;
     }
 

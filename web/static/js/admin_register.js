@@ -4,7 +4,7 @@ var userPassword = null;
 var ruserPassword = null;
 
 
-$(function(){
+$(function() {
 
 	userName = $("#name");
 	userPassword = $("#password");
@@ -83,15 +83,13 @@ $(function(){
 		}
 	});
 	
-
-	
 	addBtn.bind("click",function(){
 		if(userCode.attr("validateStatus") != "true"){
 			userCode.blur();
 		}else if(userName.attr("validateStatus") != "true"){
 			userName.blur();
 		}else if(userPassword.attr("validateStatus") != "true"){
-			userPassword.blur();
+			userPassword.blur(alert('密码不正确'));
 		}else if(ruserPassword.attr("validateStatus") != "true"){
 			ruserPassword.blur();
 		}else{
@@ -100,6 +98,28 @@ $(function(){
 			}
 		}
 	});
+	
+	$('#addBtn').click(function () {
+		if(userCode.attr("validateStatus") != "true"){
+			userCode.blur();
+		}else if(userName.attr("validateStatus") != "true"){
+			userName.blur();
+		}else if(userPassword.attr("validateStatus") != "true"){
+			userPassword.blur(alert('密码不正确'));
+		}else if(ruserPassword.attr("validateStatus") != "true"){
+			ruserPassword.blur();
+		}else{
+			if(confirm("是否确认提交数据")){
+				$("#userForm").submit();
+			}
+		}
+   });
+	
+	
+	
+	
+	
+	
 
 });
 

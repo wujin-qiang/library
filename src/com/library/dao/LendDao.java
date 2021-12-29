@@ -65,4 +65,8 @@ public class LendDao {
     public int lendBookDateList(long book_id) {
         return sqlSessionTemplate.selectOne(NAMESPACE + "lendBookDateList", book_id);
     }
+  //判断该读者是否有图书逾期未归还
+    public int lendBookDateList1(long readerId) {
+        return sqlSessionTemplate.selectOne(NAMESPACE + "lendBookDateList1", readerId);
+    }
 }

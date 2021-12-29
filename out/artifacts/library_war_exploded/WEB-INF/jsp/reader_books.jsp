@@ -12,8 +12,19 @@
             $('#header').load('reader_header.html');
         })
     </script>
+    <style>
+        #link01{
+            width: 50px;
+            height: 50px;
+            background-color: #abe0a8;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+        }
+     </style>
+    
 </head>
-<body background="img/login_bg.jpg" style=" background-repeat:no-repeat ;
+<body background="img/3.jpg" style=" background-repeat:no-repeat ;
 background-size:100% 100%;
 background-attachment: fixed;">
 
@@ -22,8 +33,8 @@ background-attachment: fixed;">
 <div style="padding: 20px 550px 10px">
     <form method="post" action="reader_querybook_do.html" class="form-inline" id="searchform">
         <div class="input-group">
-            <input type="text" placeholder="输入图书名" class="form-control" id="search" name="searchWord"
-                   class="form-control">
+            <input type="text" placeholder="图书名/作者/出版社/ISBN/分类" class="form-control" id="search" name="searchWord"
+                   class="form-control" style="width:250px">
             <span class="input-group-btn">
                 <input type="submit" value="搜索" class="btn btn-default">
             </span>
@@ -37,14 +48,6 @@ background-attachment: fixed;">
                 return false;
             }
         })
-        
-        function lendFun() {
-            alert("确定借阅该图书吗？")
-        }
-
-        function unlendFun() {
-            alert("确定归还该图书吗？")
-        }
     </script>
 </div>
 <div style="position: relative;top: 10%">
@@ -83,6 +86,7 @@ background-attachment: fixed;">
                 <th>ISBN</th>
                 <th>价格</th>
                 <th>剩余数量</th>
+                <th>分类</th>
                 <th>借还</th>
                 <th>详情</th>
             </tr>
@@ -96,6 +100,7 @@ background-attachment: fixed;">
                     <td><c:out value="${book.isbn}"></c:out></td>
                     <td><c:out value="${book.price}"></c:out></td>
                     <td><c:out value="${book.number}"></c:out></td>
+                    <td><c:out value="${book.classId}"></c:out></td>
 
                     <c:set var="flag" value="false"/>
                     <c:forEach var="lend" items="${myLendList}">
@@ -104,15 +109,16 @@ background-attachment: fixed;">
                         </c:if>
                     </c:forEach>
                     <c:if test="${flag}">
-                        <td><a href="returnbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
-
-                            <button type="button" onclick="unlendFun()" class="btn btn-danger btn-xs">归还 <c:out value="${book.overDate}"></c:out></button>
+                        <td><a href="javascript:if(confirm('确实要归还吗?'))
+                        location='returnbook.html?bookId=<c:out value="${book.bookId}"></c:out>'">
+                            <button type="button"  class="btn btn-danger btn-xs">归还 <c:out value="${book.overDate}"></c:out></button>
                         </a></td>
                     </c:if>
                     <c:if test="${not flag}">
                         <c:if test="${book.number>0}">
-                            <td><a href="lendbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
-                                <button type="button" onclick="lendFun()" class="btn btn-primary btn-xs">借阅</button>
+                            <td><a href="javascript:if(confirm('确实要借阅吗?'))
+                            location='lendbook.html?bookId=<c:out value="${book.bookId}"></c:out>'">
+                                <button type="button"  class="btn btn-primary btn-xs">借阅</button>
                             </a></td>
                         </c:if>
                         <c:if test="${book.number==0}">
@@ -128,8 +134,29 @@ background-attachment: fixed;">
             </c:forEach>
             </tbody>
         </table>
+        
+        
+        <div class='page all'>
+				<b>共${pageUtil.pageNumber}</b>条,当前第<span>${pageUtil.pageIndex}</span>页
+				<a href="reader_books.html?pageIndex=1" class='first'>首页</a> <a
+					href="reader_books.html?pageIndex=${pageUtil.pageIndex>1?pageUtil.pageIndex-1:1}"
+					class='pre'>上一页</a>
+				<c:forEach begin="1" end="${pageUtil.pageCount}" var="i">
+					<a href="reader_books.html?pageIndex=${i}"
+						style="text-decoration: none;">${i}</a>
+				</c:forEach>
+				<a
+					href="reader_books.html?pageIndex=${pageUtil.pageIndex<pageUtil.pageCount?pageUtil.pageIndex+1:pageUtil.pageCount}"
+					class='next'>下一页</a> <a
+					href="reader_books.html?pageIndex=${pageUtil.pageCount}"
+					class='last'>末页</a>
+			</div>
+        
+        
+        
+        
+        
     </div>
 </div>
-
 </body>
 </html>

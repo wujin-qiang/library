@@ -1,16 +1,22 @@
 package com.library.controller;
 
 import com.library.bean.Admin;
+import com.library.bean.Book;
 import com.library.bean.ReaderCard;
 import com.library.bean.ReaderInfo;
 import com.library.bean.ReaderInfoDate;
+import com.library.service.AdminInfoService;
 import com.library.service.LendService;
 import com.library.service.LoginService;
 import com.library.service.ReaderCardService;
 import com.library.service.ReaderInfoService;
+
+import tools.PageUtil;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.SocketUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ReaderController {
@@ -35,7 +42,9 @@ public class ReaderController {
 
     @Autowired
     private LendService lendService;
-
+    
+    @Autowired
+    private AdminInfoService adminService;
 
     @Autowired
     private ReaderCardService readerCardService;
@@ -59,12 +68,47 @@ public class ReaderController {
     }
 
     @RequestMapping("allreaders.html")
-    public ModelAndView allBooks() throws ParseException {
-        ArrayList<ReaderInfo> readers = readerInfoService.readerInfos();
-        ModelAndView modelAndView = new ModelAndView("admin_readers");
-        modelAndView.addObject("readers", readers);
+    public ModelAndView allBooks(HttpServletRequest request, Model model) throws ParseException {
+    	int pageIndex = 1;
+    	int pageSize = 10;
+    	PageUtil<ReaderInfo> pageUtil = new PageUtil<ReaderInfo>();
+    	List<ReaderInfo> readers = new ArrayList<ReaderInfo>();
+    	if (request.getParameter("pageIndex") != null) {
+            pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
+        }
+    	pageUtil.setPageIndex(pageIndex);
+    	int number = readerInfoService.getTotal();
+    	pageUtil.setPageNumber(number);
+    	pageUtil.setPageSize(pageSize);
+    	pageUtil.setPageCount((int) Math.ceil((double) (pageUtil
+                .getPageNumber() / pageUtil.getPageSize())) + 1);
+    	int index = (pageIndex - 1) * pageSize;
+    	readers = readerInfoService.readerInfos(index);
+    	pageUtil.setList(readers);
+    	model.addAttribute("pageUtil", pageUtil);
+    	model.addAttribute("readers", readers);
+    	return new ModelAndView("admin_readers");
+    }
+    
+    @RequestMapping("alladmins.html")
+    public ModelAndView allAdmins() throws ParseException {
+        ArrayList<Admin> admins = adminService.adminInfos();
+        ModelAndView modelAndView = new ModelAndView("admin_all");
+        modelAndView.addObject("admins", admins);
         return modelAndView;
     }
+    
+    @RequestMapping("admin_delete.html")
+    public String adminDelete(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        long adminId = Long.parseLong(request.getParameter("adminId"));
+            if (adminService.deleteAdminInfo(adminId) ) {
+                redirectAttributes.addFlashAttribute("succ", "删除成功！");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "删除失败！");
+            }
+        return "redirect:/alladmins.html";
+    }
+
 
     @RequestMapping("reader_delete.html")
     public String readerDelete(HttpServletRequest request, RedirectAttributes redirectAttributes) {
