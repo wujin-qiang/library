@@ -51,6 +51,10 @@ public class LoginService {
         return  adminDao.addAdmin(admin)>0;
     }
 
+    public Admin findAdmin(String name){
+        return  adminDao.getReaderInfoByName(name);
+    }
+
     public String findName(String name) {
         // TODO Auto-generated method stub
         if(adminDao.getReaderInfoByName(name)!=null){

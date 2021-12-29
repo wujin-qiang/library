@@ -5,6 +5,15 @@ public class Admin {
     private long admin_id;
     private String password;
     private String username;
+    private String issup;
+
+    public String getIssup() {
+        return issup;
+    }
+
+    public void setIssup(String issup) {
+        this.issup = issup;
+    }
 
     public long getAdminId() {
         return admin_id;

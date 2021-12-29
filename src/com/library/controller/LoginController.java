@@ -56,9 +56,9 @@ public class LoginController {
             admin.setUsername(username);
             admin.setPassword(passwd);
             System.out.println(username);
-            Long id= loginService.getAdminUsername(username);
-            System.out.println(id);
-            admin.setAdminId(id);
+            Admin ad= loginService.findAdmin(username);
+            admin.setAdminId(ad.getAdminId());
+            admin.setIssup(ad.getIssup());
             request.getSession().setAttribute("admin", admin);
             res.put("stateCode", "1");
             res.put("msg", "管理员登陆成功！");
@@ -162,7 +162,7 @@ public class LoginController {
 
     //注册
     @RequestMapping("admin_add")
-    public ModelAndView reader_add(String name, String password, RedirectAttributes redirectAttributes) {
+    public String reader_add(String name, String password, RedirectAttributes redirectAttributes) {
         Admin admin = new Admin();
         admin.setUsername(name);
         admin.setPassword(password);
@@ -175,7 +175,7 @@ public class LoginController {
                 redirectAttributes.addFlashAttribute("error", "管理员注册失败！");
             }
         }
-        return new ModelAndView("index");
+        return "redirect:/alladmins.html";
     }
     //配置404页面
     @RequestMapping("*")

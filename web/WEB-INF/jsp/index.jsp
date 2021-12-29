@@ -72,7 +72,6 @@ background-attachment: fixed;">
     <div class="panel-heading" style="background-color: #fff">
         <strong class="panel-title">请登录</strong>
         <a href="register" class="panel-title">读者注册</a>
-        <a href="admin_register" class="panel-title">管理员注册</a>
     </div>
     <div class="panel-body">
         <div class="form-group">

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <nav style="position:fixed;z-index: 999;width: 100%;background-color: #25c6fc" class="navbar navbar-default"
@@ -45,11 +46,17 @@
                         密码修改
                     </a>
                 </li>
-                <c:if test="${admin.isSup==1}">
-                    <li >
-                        <a href="alladmins.html" style="color: white">
-                            全部管理员显示
+                <c:if test="${admin.issup==1}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white">
+                            管理员管理
+                            <b class="caret"></b>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="alladmins.html">全部管理员显示</a></li>
+                            <li class="divider"></li>
+                            <li><a href="admin_register">添加管理员</a></li>
+                        </ul>
                     </li>
                 </c:if>
 
